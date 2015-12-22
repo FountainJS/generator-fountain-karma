@@ -1,5 +1,6 @@
 const _ = require('lodash');
-var fountain = require('fountain-generator');
+const fountain = require('fountain-generator');
+const conf = require('./conf');
 
 module.exports = fountain.Base.extend({
   prompting: function () {
@@ -40,7 +41,6 @@ module.exports = fountain.Base.extend({
               'karma-angular-filesort': '^1.0.1'
             }
           });
-
         }
       }
 
@@ -79,7 +79,9 @@ module.exports = fountain.Base.extend({
         modules: this.props.modules
       };
 
-      this.fs.copyTpl(
+      options.karmaConf = conf(options);
+
+      this.copyTemplate(
         this.templatePath('conf/karma.conf.js'),
         this.destinationPath('conf/karma.conf.js'),
         options
@@ -94,8 +96,9 @@ module.exports = fountain.Base.extend({
       }
 
       options.singleRun = false;
+      options.karmaConf = conf(options);
 
-      this.fs.copyTpl(
+      this.copyTemplate(
         this.templatePath('conf/karma.conf.js'),
         this.destinationPath('conf/karma-auto.conf.js'),
         options
