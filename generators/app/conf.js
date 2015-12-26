@@ -31,7 +31,9 @@ module.exports = function karmaConf(props) {
     conf.files = lit`listFiles()`;
   }
 
-  conf.preprocessors = {};
+  if (props.modules === 'webpack' || props.framework === 'angular1') {
+    conf.preprocessors = {};
+  }
   if (props.modules === 'webpack') {
     conf.preprocessors[pathSrcJs] = ['webpack'];
   }
@@ -42,7 +44,7 @@ module.exports = function karmaConf(props) {
   if (props.framework === 'angular1') {
     conf.ngHtml2JsPreprocessor = {
       stripPrefix: lit`\`\${conf.paths.src}/\``,
-      moduleName: 'app'
+      moduleName: lit`conf.ngModule`
     };
 
     if (props.modules === 'inject') {
@@ -64,14 +66,14 @@ module.exports = function karmaConf(props) {
       conf.jspm.loadFiles = [
         'jspm_packages/npm/reflect-metadata@0.1.2/Reflect.js',
         'node_modules/es6-shim/es6-shim.js',
-        // Very strange bug, using *.js fail with an "ENFILE" file error
-        lit`conf.path.src('app/hello.js')`,
-        lit`conf.path.src('app/hello.spec.js')`
+        lit`conf.path.src('**/*.js')`
       ];
-    } else if (props.framework === 'angular1') {
-      conf.jspm.loadFiles = [lit`conf.path.src('**/*.js')`];
     } else {
-      conf.jspm.loadFiles = [lit`conf.path.src('app/**/*.js')`];
+      conf.jspm.loadFiles = [lit`conf.path.src('**/*.js')`];
+    }
+
+    if (props.framework !== 'react') {
+      conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
     }
   }
 

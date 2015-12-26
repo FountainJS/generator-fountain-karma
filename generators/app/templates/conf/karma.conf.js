@@ -39,7 +39,7 @@ function listFiles() {
 
 <% } -%>
 module.exports = function (config) {
-  var configuration = <%- json(karmaConf) %>;
+  var configuration = <%- json(karmaConf, 2) %>;
 
   config.set(configuration);
 };
