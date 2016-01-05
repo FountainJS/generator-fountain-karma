@@ -26,6 +26,10 @@ module.exports = function karmaConf(props) {
       'node_modules/es6-shim/es6-shim.js',
       pathSrcJs
     ];
+
+    if (props.framework === 'angular1') {
+      conf.files.push(pathSrcHtml);
+    }
   }
   if (props.modules === 'inject') {
     conf.files = lit`listFiles()`;
@@ -39,13 +43,25 @@ module.exports = function karmaConf(props) {
   }
   if (props.framework === 'angular1') {
     conf.preprocessors[pathSrcHtml] = ['ng-html2js'];
+    if (props.modules === 'systemjs' && props.js === 'typescript') {
+      conf.preprocessors[pathSrcHtml].push('generic');
+      conf.genericPreprocessor = {
+        rules: [lit`{
+        process(content, file, done) {
+          file.path = file.path.replace(/\\.js$/, '.ts');
+          done(content);
+        }
+      }`]
+      };
+    }
   }
 
   if (props.framework === 'angular1') {
-    conf.ngHtml2JsPreprocessor = {
-      stripPrefix: lit`\`\${conf.paths.src}/\``,
-      moduleName: lit`conf.ngModule`
-    };
+    conf.ngHtml2JsPreprocessor = {};
+
+    if (props.modules !== 'systemjs') {
+      conf.ngHtml2JsPreprocessor.stripPrefix = lit`\`\${conf.paths.src}/\``;
+    }
 
     if (props.modules === 'inject') {
       conf.angularFilesort = {
@@ -60,19 +76,29 @@ module.exports = function karmaConf(props) {
   }
 
   if (props.modules === 'systemjs') {
-    conf.jspm = {};
+    conf.jspm = {
+      loadFiles: []
+    };
 
     if (props.framework === 'angular2') {
-      conf.jspm.loadFiles = [
+      conf.jspm.loadFiles.push(
         'jspm_packages/npm/reflect-metadata@0.1.2/Reflect.js',
-        'node_modules/es6-shim/es6-shim.js',
-        lit`conf.path.src('**/*.js')`
-      ];
-    } else {
-      conf.jspm.loadFiles = [lit`conf.path.src('**/*.js')`];
+        'node_modules/es6-shim/es6-shim.js'
+      );
     }
 
-    if (props.framework !== 'react') {
+    if (props.js === 'typescript') {
+      if (props.framework === 'react') {
+        conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.tsx')`);
+      } else {
+        conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.ts')`);
+      }
+    } else {
+      conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.js')`);
+    }
+
+    // if (props.framework !== 'react') {
+    if (props.framework === 'angular1') {
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
     }
   }
@@ -96,6 +122,9 @@ module.exports = function karmaConf(props) {
   }
   if (props.modules === 'inject' && props.framework === 'angular1') {
     conf.plugins.push(lit`require('karma-angular-filesort')`);
+  }
+  if (props.modules === 'systemjs' && props.framework === 'angular1' && props.js === 'typescript') {
+    conf.plugins.push(lit`require('karma-generic-preprocessor')`);
   }
 
   return conf;

@@ -3,22 +3,23 @@ const fountain = require('fountain-generator');
 const conf = require('./conf');
 
 module.exports = fountain.Base.extend({
-  prompting: function () {
+  prompting() {
     this.fountainPrompting();
   },
 
   configuring: {
-    package: function () {
-      var pkg = {
+    pkg() {
+      const pkg = {
         devDependencies: {
-          karma: '^0.13.14',
+          'karma': '^0.13.14',
           'karma-coverage': '^0.5.3',
           'karma-jasmine': '^0.3.6',
           'jasmine-core': '^2.4.1',
           'karma-junit-reporter': '^0.3.8',
           'karma-phantomjs-launcher': '^0.2.1',
           'karma-phantomjs-shim': '^1.1.2',
-          phantomjs: '^1.9.19'
+          'phantomjs': '^1.9.19',
+          'es6-shim': '^0.34.0'
         },
         scripts: {
           test: 'gulp karma:single-run'
@@ -67,47 +68,42 @@ module.exports = fountain.Base.extend({
             'karma-jspm': '^2.0.2'
           }
         });
+
+        if (this.props.framework === 'angular1' && this.props.js === 'typescript') {
+          _.merge(pkg, {
+            devDependencies: {
+              'karma-generic-preprocessor': '^1.1.0'
+            }
+          });
+        }
       }
 
       this.mergeJson('package.json', pkg);
     },
 
-    conf: function () {
-      var options = {
-        singleRun: true,
-        framework: this.props.framework,
-        modules: this.props.modules
-      };
-
-      options.karmaConf = conf(options);
+    conf() {
+      const props = Object.assign({}, { singleRun: true }, this.props);
+      props.karmaConf = conf(props);
 
       this.copyTemplate(
         this.templatePath('conf/karma.conf.js'),
         this.destinationPath('conf/karma.conf.js'),
-        options
+        props
       );
 
-      if (this.props.modules === 'webpack') {
-        this.fs.copyTpl(
-          this.templatePath('conf/webpack-test.conf.js'),
-          this.destinationPath('conf/webpack-test.conf.js'),
-          options
-        );
-      }
-
-      options.singleRun = false;
-      options.karmaConf = conf(options);
+      props.singleRun = false;
+      props.karmaConf = conf(props);
 
       this.copyTemplate(
         this.templatePath('conf/karma.conf.js'),
         this.destinationPath('conf/karma-auto.conf.js'),
-        options
+        props
       );
     }
   },
 
   writing: {
-    gulp: function () {
+    gulp() {
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
@@ -115,7 +111,7 @@ module.exports = fountain.Base.extend({
       );
     },
 
-    src: function () {
+    src() {
       if (this.props.modules === 'webpack') {
         this.fs.copyTpl(
           this.templatePath('src/index.spec.js'),
