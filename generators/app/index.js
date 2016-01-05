@@ -85,20 +85,16 @@ module.exports = fountain.Base.extend({
       const props = Object.assign({}, { singleRun: true }, this.props);
       props.karmaConf = conf(props);
 
-      this.copyTemplate(
-        this.templatePath('conf/karma.conf.js'),
-        this.destinationPath('conf/karma.conf.js'),
-        props
-      );
+      this.copyTemplate('conf/karma.conf.js', 'conf/karma.conf.js', props);
 
       props.singleRun = false;
       props.karmaConf = conf(props);
 
-      this.copyTemplate(
-        this.templatePath('conf/karma.conf.js'),
-        this.destinationPath('conf/karma-auto.conf.js'),
-        props
-      );
+      this.copyTemplate('conf/karma.conf.js', 'conf/karma-auto.conf.js', props);
+
+      if (this.props.modules === 'inject') {
+        this.copyTemplate('conf/karma-files.conf.js', 'conf/karma-files.conf.js');
+      }
     }
   },
 

@@ -1,0 +1,34 @@
+const conf = require('./gulp.conf');
+const wiredep = require('wiredep');
+
+module.exports = function listFiles() {
+  const wiredepOptions = Object.assign({}, conf.wiredep, {
+<% if (framework === 'react') { -%>
+    overrides: {
+      react: { main: [ 'react-with-addons.js' ] }
+    },
+<% } -%>
+    dependencies: true,
+    devDependencies: true
+  });
+
+  const patterns = [
+    ...wiredep(wiredepOptions).js,
+<% if (framework === 'angular1') { -%>
+    conf.path.tmp('**/*.js'),
+    pathSrcHtml
+<% } -%>
+<% if (framework === 'react') { -%>
+    conf.path.tmp('app/**/*.js')
+<% } -%>
+  ];
+
+  var files = patterns.map(pattern => ({ pattern: pattern }));
+  files.push({
+    pattern: conf.path.src('assets/**/*'),
+    included: false,
+    served: true,
+    watched: false
+  });
+  return files;
+}
