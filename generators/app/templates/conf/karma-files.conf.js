@@ -16,7 +16,7 @@ module.exports = function listFiles() {
     ...wiredep(wiredepOptions).js,
 <% if (framework === 'angular1') { -%>
     conf.path.tmp('**/*.js'),
-    pathSrcHtml
+    conf.path.src('**/*.html')
 <% } -%>
 <% if (framework === 'react') { -%>
     conf.path.tmp('app/**/*.js')
