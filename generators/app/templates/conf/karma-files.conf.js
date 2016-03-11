@@ -12,8 +12,7 @@ module.exports = function listFiles() {
     devDependencies: true
   });
 
-  const patterns = [
-    ...wiredep(wiredepOptions).js,
+  const patterns = wiredep(wiredepOptions).js.concat([
 <% if (framework === 'angular1') { -%>
     conf.path.tmp('**/*.js'),
     conf.path.src('**/*.html')
