@@ -20,9 +20,9 @@ module.exports = function listFiles() {
 <% if (framework === 'react') { -%>
     conf.path.tmp('app/**/*.js')
 <% } -%>
-  ];
-
-  var files = patterns.map(pattern => ({ pattern: pattern }));
+  ]);
+  
+  const files = patterns.map(pattern => ({pattern}));
   files.push({
     pattern: conf.path.src('assets/**/*'),
     included: false,
