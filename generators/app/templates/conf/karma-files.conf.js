@@ -12,8 +12,7 @@ module.exports = function listFiles() {
     devDependencies: true
   });
 
-  const patterns = [
-    ...wiredep(wiredepOptions).js,
+  const patterns = wiredep(wiredepOptions).js.concat([
 <% if (framework === 'angular1') { -%>
     conf.path.tmp('**/*.js'),
     conf.path.src('**/*.html')
@@ -21,9 +20,9 @@ module.exports = function listFiles() {
 <% if (framework === 'react') { -%>
     conf.path.tmp('app/**/*.js')
 <% } -%>
-  ];
-
-  var files = patterns.map(pattern => ({ pattern: pattern }));
+  ]);
+  
+  const files = patterns.map(pattern => ({pattern}));
   files.push({
     pattern: conf.path.src('assets/**/*'),
     included: false,
