@@ -112,7 +112,7 @@ module.exports = fountain.Base.extend({
         this.fs.copyTpl(
           this.templatePath('src/index.spec.js'),
           this.destinationPath('src/index.spec.js'),
-          { framework: this.props.framework }
+          { framework: this.props.framework, js: this.props.js }
         );
       }
     }
