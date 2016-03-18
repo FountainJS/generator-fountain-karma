@@ -64,6 +64,7 @@ module.exports = function karmaConf(props) {
     }
 
     if (props.modules === 'inject') {
+      conf.ngHtml2JsPreprocessor.moduleName = 'app';
       conf.angularFilesort = {
         whitelist: [lit`conf.path.tmp('**/!(*.html|*.spec|*.mock).js')`]
       };
@@ -77,7 +78,8 @@ module.exports = function karmaConf(props) {
 
   if (props.modules === 'systemjs') {
     conf.jspm = {
-      loadFiles: []
+      loadFiles: [],
+      config: 'jspm.config.js'
     };
 
     if (props.framework === 'angular2') {

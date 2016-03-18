@@ -21,7 +21,7 @@ module.exports = function listFiles() {
     conf.path.tmp('app/**/*.js')
 <% } -%>
   ]);
-  
+
   const files = patterns.map(pattern => ({pattern}));
   files.push({
     pattern: conf.path.src('assets/**/*'),
@@ -30,4 +30,4 @@ module.exports = function listFiles() {
     watched: false
   });
   return files;
-}
+};
