@@ -78,6 +78,7 @@ module.exports = function karmaConf(props) {
   if (props.modules === 'systemjs') {
     conf.jspm = {
       loadFiles: []
+      config: 'jspm.config.js'
     };
 
     if (props.framework === 'angular2') {
