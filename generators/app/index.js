@@ -57,7 +57,7 @@ module.exports = fountain.Base.extend({
         _.merge(pkg, {
           devDependencies: {
             'karma-webpack': '^1.7.0',
-            'isparta-instrumenter-loader': '^1.0.0'
+            'isparta-loader': '^2.0.0'
           }
         });
       }
