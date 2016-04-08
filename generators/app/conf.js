@@ -72,6 +72,11 @@ module.exports = function karmaConf(props) {
   }
 
   if (props.modules === 'webpack') {
+    conf.reporters = lit`['progress', 'coverage']`;
+    conf.coverageReporter = {
+      type: 'html',
+      dir: 'coverage/'
+    };
     conf.webpack = lit`require('./webpack-test.conf.js')`;
     conf.webpackMiddleware = { noInfo: true };
   }
