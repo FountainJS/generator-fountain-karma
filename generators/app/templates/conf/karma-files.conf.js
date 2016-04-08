@@ -5,7 +5,7 @@ module.exports = function listFiles() {
   const wiredepOptions = Object.assign({}, conf.wiredep, {
 <% if (framework === 'react') { -%>
     overrides: {
-      react: { main: [ 'react-with-addons.js' ] }
+      react: {main: ['react-with-addons.js']}
     },
 <% } -%>
     dependencies: true,
