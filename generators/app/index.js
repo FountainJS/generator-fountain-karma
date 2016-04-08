@@ -16,10 +16,10 @@ module.exports = fountain.Base.extend({
           'karma-coverage': '^0.5.3',
           'karma-junit-reporter': '^0.3.8',
           'karma-mocha': '^0.2.2',
-          'karma-phantomjs-launcher': '^0.2.1',
+          'karma-phantomjs-launcher': '^1.0.0',
           'karma-phantomjs-shim': '^1.1.2',
           'mocha': '^2.4.5',
-          'phantomjs': '^1.9.19',
+          'phantomjs-prebuilt': '^2.1.6',
           'es6-shim': '^0.34.0'
         },
         scripts: {
