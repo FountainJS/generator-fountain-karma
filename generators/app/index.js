@@ -12,13 +12,14 @@ module.exports = fountain.Base.extend({
       const pkg = {
         devDependencies: {
           'karma': '^0.13.14',
+          'karma-chai-plugins': '^0.7.0',
           'karma-coverage': '^0.5.3',
-          'karma-jasmine': '^0.3.6',
-          'jasmine-core': '^2.4.1',
           'karma-junit-reporter': '^0.3.8',
-          'karma-phantomjs-launcher': '^0.2.1',
+          'karma-mocha': '^0.2.2',
+          'karma-phantomjs-launcher': '^1.0.0',
           'karma-phantomjs-shim': '^1.1.2',
-          'phantomjs': '^1.9.19',
+          'mocha': '^2.4.5',
+          'phantomjs-prebuilt': '^2.1.6',
           'es6-shim': '^0.34.0'
         },
         scripts: {
@@ -57,7 +58,7 @@ module.exports = fountain.Base.extend({
         _.merge(pkg, {
           devDependencies: {
             'karma-webpack': '^1.7.0',
-            'isparta-instrumenter-loader': '^1.0.0'
+            'isparta-loader': '^2.0.0'
           }
         });
       }
