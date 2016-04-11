@@ -77,7 +77,7 @@ module.exports = function karmaConf(props) {
       type: 'html',
       dir: 'coverage/'
     };
-    conf.webpack = lit`require('./webpack-test.conf.js')`;
+    conf.webpack = lit`require('./webpack-test.conf')`;
     conf.webpackMiddleware = { noInfo: true };
   }
 
