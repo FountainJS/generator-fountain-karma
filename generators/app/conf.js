@@ -7,7 +7,7 @@ module.exports = function karmaConf(props) {
     singleRun: props.singleRun,
     autoWatch: !props.singleRun,
     logLevel: 'INFO',
-    junitReporter: { outputDir: 'test-reports' }
+    junitReporter: {outputDir: 'test-reports'}
   };
 
   const pathSrcJs = lit`conf.path.src('index.spec.js')`;
@@ -78,7 +78,7 @@ module.exports = function karmaConf(props) {
       dir: 'coverage/'
     };
     conf.webpack = lit`require('./webpack-test.conf')`;
-    conf.webpackMiddleware = { noInfo: true };
+    conf.webpackMiddleware = {noInfo: true};
   }
 
   if (props.modules === 'systemjs') {
