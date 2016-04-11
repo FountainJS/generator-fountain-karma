@@ -24,6 +24,11 @@ module.exports = fountain.Base.extend({
         },
         scripts: {
           test: 'gulp karma:single-run'
+        },
+        eslintConfig: {
+          globals: {
+            expect: true
+          }
         }
       };
 
@@ -83,7 +88,7 @@ module.exports = fountain.Base.extend({
     },
 
     conf() {
-      const props = Object.assign({}, { singleRun: true }, this.props);
+      const props = Object.assign({}, {singleRun: true}, this.props);
       props.karmaConf = conf(props);
 
       this.copyTemplate('conf/karma.conf.js', 'conf/karma.conf.js', props);
@@ -104,7 +109,7 @@ module.exports = fountain.Base.extend({
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        { modules: this.props.modules }
+        {modules: this.props.modules}
       );
     },
 
@@ -113,7 +118,7 @@ module.exports = fountain.Base.extend({
         this.fs.copyTpl(
           this.templatePath('src/index.spec.js'),
           this.destinationPath('src/index.spec.js'),
-          { framework: this.props.framework, js: this.props.js }
+          {framework: this.props.framework, js: this.props.js}
         );
       }
     }
