@@ -24,6 +24,11 @@ module.exports = fountain.Base.extend({
         },
         scripts: {
           test: 'gulp karma:single-run'
+        },
+        eslintConfig: {
+          globals: {
+            expect: true
+          }
         }
       };
 
