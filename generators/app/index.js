@@ -24,11 +24,6 @@ module.exports = fountain.Base.extend({
         },
         scripts: {
           test: 'gulp karma:single-run'
-        },
-        eslintConfig: {
-          globals: {
-            expect: true
-          }
         }
       };
 
@@ -39,6 +34,11 @@ module.exports = fountain.Base.extend({
             'gulp-ng-annotate': '^1.1.0',
             'karma-angular-filesort': '^1.0.0',
             'karma-ng-html2js-preprocessor': '^0.2.0'
+          },
+          eslintConfig: {
+            globals: {
+              expect: true
+            }
           }
         });
 
