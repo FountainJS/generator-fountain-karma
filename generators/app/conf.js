@@ -107,6 +107,7 @@ module.exports = function karmaConf(props) {
     // if (props.framework !== 'react') {
     if (props.framework === 'angular1') {
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
+      conf.jspm.browser = 'jspm.test.js';
     }
   }
 
