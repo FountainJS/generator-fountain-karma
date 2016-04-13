@@ -88,13 +88,6 @@ module.exports = function karmaConf(props) {
       browser: 'jspm.test.js'
     };
 
-    if (props.framework === 'angular2') {
-      conf.jspm.loadFiles.push(
-        'jspm_packages/npm/reflect-metadata@0.1.2/Reflect.js',
-        'node_modules/es6-shim/es6-shim.js'
-      );
-    }
-
     if (props.js === 'typescript') {
       if (props.framework === 'react') {
         conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.tsx')`);
