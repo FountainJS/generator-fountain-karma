@@ -12,7 +12,6 @@ module.exports = fountain.Base.extend({
       const pkg = {
         devDependencies: {
           'karma': '^0.13.14',
-          'karma-chai-plugins': '^0.7.0',
           'karma-coverage': '^0.5.3',
           'karma-junit-reporter': '^0.3.8',
           'jasmine': '^2.4.1',
