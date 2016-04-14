@@ -14,11 +14,11 @@ module.exports = function karmaConf(props) {
   const pathSrcHtml = lit`conf.path.src('**/*.html')`;
 
   if (props.modules === 'systemjs') {
-    conf.frameworks = props.framework === 'angular2' ? ['jasmine', 'jspm', 'mocha', 'chai', 'sinon-chai'] : ['phantomjs-shim', 'jspm', 'mocha', 'chai', 'sinon-chai'];
+    conf.frameworks = ['jasmine', 'jspm', 'chai', 'sinon-chai'];
   } else if (props.modules === 'inject' && props.framework === 'angular1') {
-    conf.frameworks = ['phantomjs-shim', 'mocha', 'chai', 'sinon-chai', 'angular-filesort'];
+    conf.frameworks = ['phantomjs-shim', 'jasmine', 'chai', 'sinon-chai', 'angular-filesort'];
   } else {
-    conf.frameworks = props.framework === 'angular2' ? ['jasmine', 'mocha', 'chai', 'sinon-chai'] : ['phantomjs-shim', 'mocha', 'chai', 'sinon-chai'];
+    conf.frameworks = ['jasmine', 'chai', 'sinon-chai'];
   }
 
   if (props.modules === 'webpack') {
@@ -105,7 +105,7 @@ module.exports = function karmaConf(props) {
   }
 
   conf.plugins = [
-    lit`require('karma-mocha')`,
+    lit`require('karma-jasmine')`,
     lit`require('karma-chai-plugins')`,
     lit`require('karma-junit-reporter')`,
     lit`require('karma-coverage')`
@@ -113,7 +113,6 @@ module.exports = function karmaConf(props) {
 
   if (props.framework === 'angular2') {
     conf.plugins.push(lit`require('karma-chrome-launcher')`);
-    conf.plugins.push(lit`require('karma-jasmine')`);
   } else {
     conf.plugins.push(lit`require('karma-phantomjs-launcher')`);
     conf.plugins.push(lit`require('karma-phantomjs-shim')`);
