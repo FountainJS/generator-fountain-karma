@@ -12,14 +12,10 @@ module.exports = fountain.Base.extend({
       const pkg = {
         devDependencies: {
           'karma': '^0.13.14',
-          'karma-chai-plugins': '^0.7.0',
           'karma-coverage': '^0.5.3',
           'karma-junit-reporter': '^0.3.8',
-          'karma-mocha': '^0.2.2',
-          'karma-phantomjs-launcher': '^1.0.0',
-          'karma-phantomjs-shim': '^1.1.2',
-          'mocha': '^2.4.5',
-          'phantomjs-prebuilt': '^2.1.6',
+          'jasmine': '^2.4.1',
+          'karma-jasmine': '^0.3.8',
           'es6-shim': '^0.34.0'
         },
         scripts: {
@@ -54,7 +50,16 @@ module.exports = fountain.Base.extend({
       if (this.props.framework === 'angular2') {
         _.merge(pkg, {
           devDependencies: {
-            'es6-shim': '^0.33.13'
+            'es6-shim': '^0.33.13',
+            'karma-chrome-launcher': '^0.2.3'
+          }
+        });
+      } else {
+        _.merge(pkg, {
+          devDependencies: {
+            'karma-phantomjs-launcher': '^1.0.0',
+            'karma-phantomjs-shim': '^1.1.2',
+            'phantomjs-prebuilt': '^2.1.6'
           }
         });
       }

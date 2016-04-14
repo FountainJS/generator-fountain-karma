@@ -2,7 +2,7 @@ const lit = require('fountain-generator').lit;
 
 module.exports = function karmaConf(props) {
   const conf = {
-    browsers: ['PhantomJS'],
+    browsers: props.framework === 'angular2' ? ['Chrome'] : ['PhantomJS'],
     basePath: '../',
     singleRun: props.singleRun,
     autoWatch: !props.singleRun,
@@ -14,11 +14,11 @@ module.exports = function karmaConf(props) {
   const pathSrcHtml = lit`conf.path.src('**/*.html')`;
 
   if (props.modules === 'systemjs') {
-    conf.frameworks = ['phantomjs-shim', 'jspm', 'mocha', 'chai', 'sinon-chai'];
+    conf.frameworks = ['jasmine', 'jspm'];
   } else if (props.modules === 'inject' && props.framework === 'angular1') {
-    conf.frameworks = ['phantomjs-shim', 'mocha', 'chai', 'sinon-chai', 'angular-filesort'];
+    conf.frameworks = ['phantomjs-shim', 'jasmine', 'angular-filesort'];
   } else {
-    conf.frameworks = ['phantomjs-shim', 'mocha', 'chai', 'sinon-chai'];
+    conf.frameworks = ['jasmine'];
   }
 
   if (props.modules === 'webpack') {
@@ -84,15 +84,9 @@ module.exports = function karmaConf(props) {
   if (props.modules === 'systemjs') {
     conf.jspm = {
       loadFiles: [],
-      config: 'jspm.config.js'
+      config: 'jspm.config.js',
+      browser: 'jspm.test.js'
     };
-
-    if (props.framework === 'angular2') {
-      conf.jspm.loadFiles.push(
-        'jspm_packages/npm/reflect-metadata@0.1.2/Reflect.js',
-        'node_modules/es6-shim/es6-shim.js'
-      );
-    }
 
     if (props.js === 'typescript') {
       if (props.framework === 'react') {
@@ -107,19 +101,21 @@ module.exports = function karmaConf(props) {
     // if (props.framework !== 'react') {
     if (props.framework === 'angular1') {
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
-      conf.jspm.browser = 'jspm.test.js';
     }
   }
 
   conf.plugins = [
-    lit`require('karma-mocha')`,
-    lit`require('karma-chai-plugins')`,
+    lit`require('karma-jasmine')`,
     lit`require('karma-junit-reporter')`,
-    lit`require('karma-phantomjs-launcher')`,
-    lit`require('karma-phantomjs-shim')`,
     lit`require('karma-coverage')`
   ];
 
+  if (props.framework === 'angular2') {
+    conf.plugins.push(lit`require('karma-chrome-launcher')`);
+  } else {
+    conf.plugins.push(lit`require('karma-phantomjs-launcher')`);
+    conf.plugins.push(lit`require('karma-phantomjs-shim')`);
+  }
   if (props.framework === 'angular1') {
     conf.plugins.push(lit`require('karma-ng-html2js-preprocessor')`);
   }
