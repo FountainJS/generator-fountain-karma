@@ -9,16 +9,18 @@ module.exports = function karmaConf(props) {
     junitReporter: {outputDir: 'test-reports'}
   };
 
-  if (process.env.TRAVIS) {
-    conf.browsers = ['Chrome_travis_ci'];
-    conf.customLaunchers = lit`{
-    Chrome_travis_ci: { // eslint-disable-line camelcase
-      base: 'Chrome',
-      flags: ['--no-sandbox']
+  if (props.framework === 'angular2') {
+    if (process.env.TRAVIS) {
+      conf.browsers = ['Chrome_travis_ci'];
+      conf.customLaunchers = lit`{
+      Chrome_travis_ci: { // eslint-disable-line camelcase
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    }`;
+    } else {
+      conf.browsers = ['Chrome'];
     }
-  }`;
-  } else if (props.framework === 'angular2') {
-    conf.browsers = ['Chrome'];
   } else {
     conf.browsers = ['PhantomJS'];
   }
