@@ -11,12 +11,12 @@ module.exports = function karmaConf(props) {
 
   if (process.env.TRAVIS) {
     conf.browsers = ['Chrome_travis_ci'];
-    conf.customLaunchers = {
-      Chrome_travis_ci: { // eslint-disable-line camelcase
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    };
+    conf.customLaunchers = lit`{
+    Chrome_travis_ci: { // eslint-disable-line camelcase
+      base: 'Chrome',
+      flags: ['--no-sandbox']
+    }
+  }`;
   } else if (props.framework === 'angular2') {
     conf.browsers = ['Chrome'];
   } else {
