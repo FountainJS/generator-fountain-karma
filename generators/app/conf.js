@@ -2,13 +2,26 @@ const lit = require('fountain-generator').lit;
 
 module.exports = function karmaConf(props) {
   const conf = {
-    browsers: props.framework === 'angular2' ? ['Chrome'] : ['PhantomJS'],
     basePath: '../',
     singleRun: props.singleRun,
     autoWatch: !props.singleRun,
     logLevel: 'INFO',
     junitReporter: {outputDir: 'test-reports'}
   };
+
+  if (process.env.TRAVIS) {
+    conf.browsers = ['Chrome_travis_ci'];
+    conf.customLaunchers = {
+      Chrome_travis_ci: { // eslint-disable-line camelcase
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    };
+  } else if (props.framework === 'angular2') {
+    conf.browsers = ['Chrome'];
+  } else {
+    conf.browsers = ['PhantomJS'];
+  }
 
   const pathSrcJs = lit`conf.path.src('index.spec.js')`;
   const pathSrcHtml = lit`conf.path.src('**/*.html')`;
