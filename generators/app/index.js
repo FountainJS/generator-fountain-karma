@@ -13,10 +13,10 @@ module.exports = fountain.Base.extend({
         devDependencies: {
           'karma': '^0.13.14',
           'karma-coverage': '^0.5.3',
-          'karma-junit-reporter': '^0.3.8',
+          'karma-junit-reporter': '^0.4.2',
           'jasmine': '^2.4.1',
           'karma-jasmine': '^0.3.8',
-          'es6-shim': '^0.34.0'
+          'es6-shim': '^0.35.0'
         },
         scripts: {
           test: 'gulp karma:single-run'
@@ -50,7 +50,6 @@ module.exports = fountain.Base.extend({
       if (this.props.framework === 'angular2') {
         _.merge(pkg, {
           devDependencies: {
-            'es6-shim': '^0.33.13',
             'karma-chrome-launcher': '^0.2.3'
           }
         });
