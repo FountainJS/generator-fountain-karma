@@ -53,6 +53,13 @@ module.exports = fountain.Base.extend({
             'karma-chrome-launcher': '^0.2.3'
           }
         });
+        if (this.props.modules === 'systemjs') {
+          _.merge(pkg, {
+            devDependencies: {
+              glob: '^7.0.3'
+            }
+          });
+        }
       } else {
         _.merge(pkg, {
           devDependencies: {

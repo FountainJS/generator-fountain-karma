@@ -1,3 +1,5 @@
+'use strict';
+
 const lit = require('fountain-generator').lit;
 
 module.exports = function karmaConf(props) {
@@ -102,20 +104,24 @@ module.exports = function karmaConf(props) {
       config: 'jspm.config.js',
       browser: 'jspm.test.js'
     };
-
+    let files;
     if (props.js === 'typescript') {
       if (props.framework === 'react') {
-        conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.tsx')`);
+        files = lit`conf.path.src('app/**/*.tsx')`;
       } else {
-        conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.ts')`);
+        files = lit`conf.path.src('app/**/*.ts')`;
       }
     } else {
-      conf.jspm.loadFiles.push(lit`conf.path.src('app/**/*.js')`);
+      files = lit`conf.path.src('app/**/*.js')`;
     }
-
-    // if (props.framework !== 'react') {
-    if (props.framework === 'angular1') {
+    if (props.framework === 'angular2') {
+      // http://stackoverflow.com/questions/35873437/enfile-file-table-overflow-with-karma
+      conf.jspm.loadFiles = lit`glob.sync(${files})`;
+    } else if (props.framework === 'angular1') {
+      conf.jspm.loadFiles.push(files);
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
+    } else {
+      conf.jspm.loadFiles.push(files);
     }
   }
 
