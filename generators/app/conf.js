@@ -107,21 +107,21 @@ module.exports = function karmaConf(props) {
     let files;
     if (props.js === 'typescript') {
       if (props.framework === 'react') {
-        files = lit`conf.path.src('app/**/*.tsx')`;
+        files = `conf.path.src('app/**/*.tsx')`;
       } else {
-        files = lit`conf.path.src('app/**/*.ts')`;
+        files = `conf.path.src('app/**/*.ts')`;
       }
     } else {
-      files = lit`conf.path.src('app/**/*.js')`;
+      files = `conf.path.src('app/**/*.js')`;
     }
     if (props.framework === 'angular2') {
       // http://stackoverflow.com/questions/35873437/enfile-file-table-overflow-with-karma
       conf.jspm.loadFiles = lit`glob.sync(${files})`;
     } else if (props.framework === 'angular1') {
-      conf.jspm.loadFiles.push(files);
+      conf.jspm.loadFiles.push(lit`${files}`);
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
     } else {
-      conf.jspm.loadFiles.push(files);
+      conf.jspm.loadFiles.push(lit`${files}`);
     }
   }
 
