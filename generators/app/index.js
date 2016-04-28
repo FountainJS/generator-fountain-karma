@@ -48,11 +48,19 @@ module.exports = fountain.Base.extend({
       }
 
       if (this.props.framework === 'angular2') {
-        _.merge(pkg, {
-          devDependencies: {
-            'karma-chrome-launcher': '^0.2.3'
-          }
-        });
+        if (process.env.TRAVIS) {
+          _.merge(pkg, {
+            devDependencies: {
+              'karma-firefox-launcher': '^0.1.7'
+            }
+          });
+        } else {
+          _.merge(pkg, {
+            devDependencies: {
+              'karma-chrome-launcher': '^0.2.3'
+            }
+          });
+        }
         if (this.props.modules === 'systemjs') {
           _.merge(pkg, {
             devDependencies: {

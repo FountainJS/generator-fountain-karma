@@ -13,13 +13,7 @@ module.exports = function karmaConf(props) {
 
   if (props.framework === 'angular2') {
     if (process.env.TRAVIS) {
-      conf.browsers = ['Chrome_travis_ci'];
-      conf.customLaunchers = lit`{
-    Chrome_travis_ci: { // eslint-disable-line camelcase
-      base: 'Chrome',
-      flags: ['--no-sandbox']
-    }
-  }`;
+      conf.browsers = ['Firefox'];
     } else {
       conf.browsers = ['Chrome'];
     }
@@ -132,7 +126,11 @@ module.exports = function karmaConf(props) {
   ];
 
   if (props.framework === 'angular2') {
-    conf.plugins.push(lit`require('karma-chrome-launcher')`);
+    if (process.env.TRAVIS) {
+      conf.plugins.push(lit`require('karma-firefox-launcher')`);
+    } else {
+      conf.plugins.push(lit`require('karma-chrome-launcher')`);
+    }
   } else {
     conf.plugins.push(lit`require('karma-phantomjs-launcher')`);
     conf.plugins.push(lit`require('karma-phantomjs-shim')`);
