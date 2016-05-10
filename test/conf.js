@@ -6,19 +6,19 @@ const conf = require('../generators/app/conf');
 
 describe('generator fountain karma conf', () => {
   it('should load right source extension files with JSPM', () => {
-    const props = TestUtils.defaults();
-    props.framework = 'angular1';
-    props.modules = 'systemjs';
-    props.js = 'js';
-    let jsonConf = conf(props);
+    const options = TestUtils.defaults();
+    options.framework = 'angular1';
+    options.modules = 'systemjs';
+    options.js = 'js';
+    let jsonConf = conf(options);
     expect(jsonConf.jspm.loadFiles[0]).to.match(/\.js'\)<<lit/);
 
-    props.js = 'typescript';
-    jsonConf = conf(props);
+    options.js = 'typescript';
+    jsonConf = conf(options);
     expect(jsonConf.jspm.loadFiles[0]).to.match(/\.ts'\)<<lit/);
 
-    props.framework = 'react';
-    jsonConf = conf(props);
+    options.framework = 'react';
+    jsonConf = conf(options);
     expect(jsonConf.jspm.loadFiles[0]).to.match(/\.tsx'\)<<lit/);
   });
 });
