@@ -3,10 +3,6 @@ const fountain = require('fountain-generator');
 const conf = require('./conf');
 
 module.exports = fountain.Base.extend({
-  prompting() {
-    this.fountainPrompting();
-  },
-
   configuring: {
     pkg() {
       const pkg = {
@@ -23,7 +19,7 @@ module.exports = fountain.Base.extend({
         }
       };
 
-      if (this.props.framework === 'angular1') {
+      if (this.options.framework === 'angular1') {
         _.merge(pkg, {
           devDependencies: {
             'angular-mocks': '^1.5.0-beta.2',
@@ -38,7 +34,7 @@ module.exports = fountain.Base.extend({
           }
         });
 
-        if (this.props.modules === 'inject') {
+        if (this.options.modules === 'inject') {
           _.merge(pkg, {
             devDependencies: {
               'karma-angular-filesort': '^1.0.1'
@@ -47,7 +43,7 @@ module.exports = fountain.Base.extend({
         }
       }
 
-      if (this.props.framework === 'angular2') {
+      if (this.options.framework === 'angular2') {
         if (process.env.TRAVIS) {
           _.merge(pkg, {
             devDependencies: {
@@ -61,7 +57,7 @@ module.exports = fountain.Base.extend({
             }
           });
         }
-        if (this.props.modules === 'systemjs') {
+        if (this.options.modules === 'systemjs') {
           _.merge(pkg, {
             devDependencies: {
               glob: '^7.0.3'
@@ -78,7 +74,7 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.props.modules === 'webpack') {
+      if (this.options.modules === 'webpack') {
         _.merge(pkg, {
           devDependencies: {
             'karma-webpack': '^1.7.0',
@@ -87,14 +83,14 @@ module.exports = fountain.Base.extend({
         });
       }
 
-      if (this.props.modules === 'systemjs') {
+      if (this.options.modules === 'systemjs') {
         _.merge(pkg, {
           devDependencies: {
             'karma-jspm': '^2.0.2'
           }
         });
 
-        if (this.props.framework === 'angular1' && this.props.js === 'typescript') {
+        if (this.options.framework === 'angular1' && this.options.js === 'typescript') {
           _.merge(pkg, {
             devDependencies: {
               'karma-generic-preprocessor': '^1.1.0'
@@ -107,17 +103,17 @@ module.exports = fountain.Base.extend({
     },
 
     conf() {
-      const props = Object.assign({}, {singleRun: true}, this.props);
-      props.karmaConf = conf(props);
+      const options = Object.assign({}, {singleRun: true}, this.options);
+      options.karmaConf = conf(options);
 
-      this.copyTemplate('conf/karma.conf.js', 'conf/karma.conf.js', props);
+      this.copyTemplate('conf/karma.conf.js', 'conf/karma.conf.js', options);
 
-      props.singleRun = false;
-      props.karmaConf = conf(props);
+      options.singleRun = false;
+      options.karmaConf = conf(options);
 
-      this.copyTemplate('conf/karma.conf.js', 'conf/karma-auto.conf.js', props);
+      this.copyTemplate('conf/karma.conf.js', 'conf/karma-auto.conf.js', options);
 
-      if (this.props.modules === 'inject') {
+      if (this.options.modules === 'inject') {
         this.copyTemplate('conf/karma-files.conf.js', 'conf/karma-files.conf.js');
       }
     }
@@ -128,16 +124,16 @@ module.exports = fountain.Base.extend({
       this.fs.copyTpl(
         this.templatePath('gulp_tasks'),
         this.destinationPath('gulp_tasks'),
-        {modules: this.props.modules}
+        {modules: this.options.modules}
       );
     },
 
     src() {
-      if (this.props.modules === 'webpack') {
+      if (this.options.modules === 'webpack') {
         this.fs.copyTpl(
           this.templatePath('src/index.spec.js'),
           this.destinationPath('src/index.spec.js'),
-          {framework: this.props.framework, js: this.props.js}
+          {framework: this.options.framework, js: this.options.js}
         );
       }
     }
