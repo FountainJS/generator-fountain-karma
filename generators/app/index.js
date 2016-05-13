@@ -13,9 +13,6 @@ module.exports = fountain.Base.extend({
           'jasmine': '^2.4.1',
           'karma-jasmine': '^0.3.8',
           'es6-shim': '^0.35.0'
-        },
-        scripts: {
-          test: 'gulp karma:single-run'
         }
       };
 
