@@ -18,7 +18,21 @@ module.exports = function listFiles() {
     conf.path.src('**/*.html')
 <% } -%>
 <% if (framework === 'react') { -%>
+<% if (sample === 'todoMVC') { -%>
+    'node_modules/es6-shim/es6-shim.js',
+    `!${conf.path.tmp('**/*.spec.js')}`,
+    conf.path.tmp('app/constants/*.js'),
+    conf.path.tmp('app/reducers/todos.js'),
+    conf.path.tmp('app/reducers/index.js'),
+    conf.path.tmp('app/actions/index.js'),
+<% if (js === 'typescript') { -%>
+    conf.path.tmp('app/assign.js'),
+<% } -%>
+    conf.path.tmp('app/components/*.js'),
+    `${conf.path.tmp('**/*.spec.js')}`
+<% } else { -%>
     conf.path.tmp('app/**/*.js')
+<% } -%>
 <% } -%>
   ]);
 
