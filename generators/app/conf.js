@@ -14,6 +14,10 @@ module.exports = function karmaConf(options) {
   if (options.framework === 'angular2') {
     if (process.env.TRAVIS) {
       conf.browsers = ['Firefox'];
+      conf.captureTimeout = 60000;
+      conf.browserDisconnectTimeout = 10000;
+      conf.browserDisconnectTolerance = 1;
+      conf.browserNoActivityTimeout = 60000;
     } else {
       conf.browsers = ['Chrome'];
     }
