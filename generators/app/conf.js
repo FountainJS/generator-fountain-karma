@@ -14,6 +14,10 @@ module.exports = function karmaConf(options) {
   if (options.framework === 'angular2') {
     if (process.env.TRAVIS) {
       conf.browsers = ['Firefox'];
+      conf.captureTimeout = 60000;
+      conf.browserDisconnectTimeout = 10000;
+      conf.browserDisconnectTolerance = 1;
+      conf.browserNoActivityTimeout = 60000;
     } else {
       conf.browsers = ['Chrome'];
     }
@@ -30,6 +34,10 @@ module.exports = function karmaConf(options) {
     conf.frameworks = ['phantomjs-shim', 'jasmine', 'angular-filesort'];
   } else {
     conf.frameworks = ['jasmine'];
+  }
+
+  if (options.framework === 'react' && options.js === 'typescript') {
+    conf.frameworks.push('es6-shim');
   }
 
   if (options.modules === 'webpack') {
@@ -149,6 +157,9 @@ module.exports = function karmaConf(options) {
   }
   if (options.modules === 'systemjs' && options.framework === 'angular1' && options.js === 'typescript') {
     conf.plugins.push(lit`require('karma-generic-preprocessor')`);
+  }
+  if (options.framework === 'react' && options.js === 'typescript') {
+    conf.plugins.push(lit`require('karma-es6-shim')`);
   }
 
   return conf;

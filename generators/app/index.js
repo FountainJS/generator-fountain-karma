@@ -40,6 +40,14 @@ module.exports = fountain.Base.extend({
         }
       }
 
+      if (this.options.framework === 'react' && this.options.js === 'typescript') {
+        _.merge(pkg, {
+          devDependencies: {
+            'karma-es6-shim': '^1.0.0'
+          }
+        });
+      }
+
       if (this.options.framework === 'angular2') {
         if (process.env.TRAVIS) {
           _.merge(pkg, {
