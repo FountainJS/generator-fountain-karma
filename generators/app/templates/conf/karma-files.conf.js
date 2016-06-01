@@ -14,6 +14,7 @@ module.exports = function listFiles() {
 
   const patterns = wiredep(wiredepOptions).js.concat([
 <% if (framework === 'angular1') { -%>
+    'node_modules/babel-polyfill/browser.js',
     conf.path.tmp('**/*.js'),
     conf.path.src('**/*.html')
 <% } -%>
