@@ -36,7 +36,7 @@ module.exports = function karmaConf(options) {
     conf.frameworks = ['jasmine'];
   }
 
-  if (options.framework === 'react' && options.js === 'typescript') {
+  if (options.framework !== 'angular2' && options.js === 'typescript') {
     conf.frameworks.push('es6-shim');
   }
 
@@ -158,7 +158,7 @@ module.exports = function karmaConf(options) {
   if (options.modules === 'systemjs' && options.framework === 'angular1' && options.js === 'typescript') {
     conf.plugins.push(lit`require('karma-generic-preprocessor')`);
   }
-  if (options.framework === 'react' && options.js === 'typescript') {
+  if (options.framework !== 'angular2' && options.js === 'typescript') {
     conf.plugins.push(lit`require('karma-es6-shim')`);
   }
 

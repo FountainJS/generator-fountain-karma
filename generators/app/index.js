@@ -40,7 +40,7 @@ module.exports = fountain.Base.extend({
         }
       }
 
-      if (this.options.framework === 'react' && this.options.js === 'typescript') {
+      if (this.options.framework !== 'angular2' && this.options.js === 'typescript') {
         _.merge(pkg, {
           devDependencies: {
             'karma-es6-shim': '^1.0.0'
@@ -138,7 +138,7 @@ module.exports = fountain.Base.extend({
         this.fs.copyTpl(
           this.templatePath('src/index.spec.js'),
           this.destinationPath('src/index.spec.js'),
-          {framework: this.options.framework, js: this.options.js}
+          {framework: this.options.framework, js: this.options.js, sample: this.options.sample}
         );
       }
     }
