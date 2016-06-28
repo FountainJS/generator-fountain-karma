@@ -34,7 +34,7 @@ module.exports = fountain.Base.extend({
         if (this.options.modules === 'inject') {
           _.merge(pkg, {
             devDependencies: {
-              'karma-angular-filesort': '^1.0.1'
+              'karma-angular-filesort': '^1.0.0'
             }
           });
         }
