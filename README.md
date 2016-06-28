@@ -4,6 +4,9 @@
   </a>
 </p>
 
+[![Build Status](https://travis-ci.org/FountainJS/generator-fountain-karma.svg?branch=master)](https://travis-ci.org/FountainJS/generator-fountain-karma)
+[![codecov](https://codecov.io/gh/FountainJS/generator-fountain-karma/branch/master/graph/badge.svg)](https://codecov.io/gh/FountainJS/generator-fountain-karma)
+
 # Fountain Karma Generator
 
 Yeoman 'fountain' generator which handle the Karma config.
