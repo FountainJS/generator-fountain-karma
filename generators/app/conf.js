@@ -119,6 +119,7 @@ module.exports = function karmaConf(options) {
     if (options.framework === 'angular2') {
       // http://stackoverflow.com/questions/35873437/enfile-file-table-overflow-with-karma
       conf.jspm.loadFiles = lit`glob.sync(${files})`;
+      conf.jspm.serveFiles = lit`glob.sync(conf.path.src('app/**/*.html'))`;
     } else if (options.framework === 'angular1') {
       conf.jspm.loadFiles.push(lit`${files}`);
       conf.jspm.loadFiles.push(lit`conf.path.src('**/*.html')`);
