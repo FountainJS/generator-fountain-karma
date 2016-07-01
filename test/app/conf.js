@@ -46,6 +46,7 @@ test('karmaConf with angular2/systemjs/babel and process.env.TRAVIS', t => {
     frameworks: ['jasmine', 'jspm'],
     jspm: {
       loadFiles: `lit>>glob.sync(conf.path.src('app/**/*.js'))<<lit`,
+      serveFiles: `lit>>glob.sync(conf.path.src('app/**/*.html'))<<lit`,
       config: 'jspm.config.js',
       browser: 'jspm.test.js'
     },
@@ -63,6 +64,7 @@ test('karmaConf with angular2/systemjs/babel', t => {
     frameworks: ['jasmine', 'jspm'],
     jspm: {
       loadFiles: `lit>>glob.sync(conf.path.src('app/**/*.js'))<<lit`,
+      serveFiles: `lit>>glob.sync(conf.path.src('app/**/*.html'))<<lit`,
       config: 'jspm.config.js',
       browser: 'jspm.test.js'
     },
