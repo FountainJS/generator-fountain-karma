@@ -1,6 +1,6 @@
 {
   "name": "generator-fountain-karma",
-  "version": "0.6.0",
+  "version": "0.6.1-test.1",
   "description": "Yeoman 'fountain' generator which handle the Karma config",
   "homepage": "",
   "repository": "fountainjs/generator-fountain-karma",
@@ -20,7 +20,7 @@
     "cli"
   ],
   "dependencies": {
-    "fountain-generator": "^0.6.0",
+    "fountain-generator": "^0.6.1-test.1",
     "lodash": "^4.9.0"
   },
   "devDependencies": {
