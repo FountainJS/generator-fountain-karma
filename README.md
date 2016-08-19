@@ -9,7 +9,7 @@
 
 # Fountain Karma Generator
 
-Yeoman 'fountain' generator which handle the Karma config.
+Yeoman Fountain generator which handle the Karma config.
 
 ## Usage
 
