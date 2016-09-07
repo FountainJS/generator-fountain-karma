@@ -1,5 +1,15 @@
 <% if (framework === 'angular2') { -%>
-require('reflect-metadata');
+Error.stackTraceLimit = Infinity;
+
+require('core-js/client/shim');
+
+require('zone.js/dist/zone');
+require('zone.js/dist/long-stack-trace-zone');
+require('zone.js/dist/proxy');
+require('zone.js/dist/sync-test');
+require('zone.js/dist/jasmine-patch');
+require('zone.js/dist/async-test');
+require('zone.js/dist/fake-async-test');
 <% } -%>
 <% if (framework === 'angular1' && sample === 'todoMVC' && js === 'babel') { -%>
 require('babel-polyfill');
