@@ -7,11 +7,11 @@ module.exports = fountain.Base.extend({
     pkg() {
       const pkg = {
         devDependencies: {
-          'karma': '^0.13.14',
-          'karma-coverage': '^0.5.3',
-          'karma-junit-reporter': '^0.4.2',
+          'karma': '^1.3.0',
+          'karma-coverage': '^1.1.1',
+          'karma-jasmine': '^1.0.2',
+          'karma-junit-reporter': '^1.1.0',
           'jasmine': '^2.4.1',
-          'karma-jasmine': '^0.3.8',
           'es6-shim': '^0.35.0'
         }
       };
@@ -82,8 +82,8 @@ module.exports = fountain.Base.extend({
       if (this.options.modules === 'webpack') {
         _.merge(pkg, {
           devDependencies: {
-            'karma-webpack': '^1.7.0',
-            'isparta-loader': '^2.0.0'
+            'babel-plugin-istanbul': '^2.0.1',
+            'karma-webpack': '^1.7.0'
           }
         });
       }
