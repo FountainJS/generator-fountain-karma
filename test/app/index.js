@@ -43,8 +43,7 @@ test('Configure package.json  with angular1/webpack', t => {
       'karma-phantomjs-launcher': '^1.0.0',
       'karma-phantomjs-shim': '^1.1.2',
       'phantomjs-prebuilt': '^2.1.6',
-      'karma-webpack': '^1.7.0',
-      'babel-plugin-istanbul': '^2.0.1'
+      'karma-webpack': '^1.7.0'
     },
     eslintConfig: {
       globals: {
@@ -95,8 +94,7 @@ test('Configure package.json  with angular2/webpack/typescript', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
       'karma-chrome-launcher': '^0.2.3',
-      'karma-webpack': '^1.7.0',
-      'babel-plugin-istanbul': '^2.0.1'
+      'karma-webpack': '^1.7.0'
     }
   });
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular2', modules: 'webpack', js: 'typescript'});
