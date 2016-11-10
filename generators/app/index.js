@@ -82,8 +82,15 @@ module.exports = fountain.Base.extend({
       if (this.options.modules === 'webpack') {
         _.merge(pkg, {
           devDependencies: {
-            'babel-plugin-istanbul': '^2.0.1',
             'karma-webpack': '^1.7.0'
+          }
+        });
+      }
+
+      if (this.options.js === 'babel') {
+        _.merge(pkg, {
+          devDependencies: {
+            'babel-plugin-istanbul': '^2.0.1'
           }
         });
       }
