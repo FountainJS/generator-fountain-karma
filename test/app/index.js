@@ -125,6 +125,29 @@ test('Configure package.json  with angular1/systemjs/typescript', t => {
   t.deepEqual(context.mergeJson['package.json'], expected);
 });
 
+test('Configure package.json  with angular1/systemjs/babel', t => {
+  const expected = _.merge({}, pkg, {
+    devDependencies: {
+      'angular-mocks': '^1.5.0-beta.2',
+      'gulp-ng-annotate': '^1.1.0',
+      'karma-angular-filesort': '^1.0.0',
+      'karma-ng-html2js-preprocessor': '^0.2.0',
+      'karma-phantomjs-launcher': '^1.0.0',
+      'karma-phantomjs-shim': '^1.1.2',
+      'phantomjs-prebuilt': '^2.1.6',
+      'karma-jspm': '^2.0.2',
+      'babel-plugin-istanbul': '^2.0.1'
+    },
+    eslintConfig: {
+      globals: {
+        expect: true
+      }
+    }
+  });
+  TestUtils.call(context, 'configuring.pkg', {framework: 'angular1', modules: 'systemjs', js: 'babel'});
+  t.deepEqual(context.mergeJson['package.json'], expected);
+});
+
 test('Copy karma.conf.js and karma-auto.conf.js when modules is systemjs', t => {
   TestUtils.call(context, 'configuring.conf', {modules: 'systemjs'});
   t.true(context.copyTemplate['conf/karma.conf.js'].length > 0);
