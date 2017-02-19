@@ -7,22 +7,22 @@ module.exports = fountain.Base.extend({
     pkg() {
       const pkg = {
         devDependencies: {
-          'karma': '^1.3.0',
+          'karma': '^1.4.1',
           'karma-coverage': '^1.1.1',
-          'karma-jasmine': '^1.0.2',
-          'karma-junit-reporter': '^1.1.0',
-          'jasmine': '^2.4.1',
-          'es6-shim': '^0.35.0'
+          'karma-jasmine': '^1.1.0',
+          'karma-junit-reporter': '^1.2.0',
+          'jasmine': '^2.5.3',
+          'es6-shim': '^0.35.3'
         }
       };
 
       if (this.options.framework === 'angular1') {
         _.merge(pkg, {
           devDependencies: {
-            'angular-mocks': '^1.5.0-beta.2',
-            'gulp-ng-annotate': '^1.1.0',
-            'karma-angular-filesort': '^1.0.0',
-            'karma-ng-html2js-preprocessor': '^0.2.0'
+            'angular-mocks': '^1.6.2',
+            'gulp-ng-annotate': '^2.0.0',
+            'karma-angular-filesort': '^1.0.2',
+            'karma-ng-html2js-preprocessor': '^1.0.0'
           },
           eslintConfig: {
             globals: {
@@ -34,7 +34,7 @@ module.exports = fountain.Base.extend({
         if (this.options.modules === 'inject') {
           _.merge(pkg, {
             devDependencies: {
-              'karma-angular-filesort': '^1.0.0'
+              'karma-angular-filesort': '^1.0.2'
             }
           });
         }
@@ -52,29 +52,29 @@ module.exports = fountain.Base.extend({
         if (process.env.TRAVIS) {
           _.merge(pkg, {
             devDependencies: {
-              'karma-firefox-launcher': '^0.1.7'
+              'karma-firefox-launcher': '^1.0.0'
             }
           });
         } else {
           _.merge(pkg, {
             devDependencies: {
-              'karma-chrome-launcher': '^0.2.3'
+              'karma-chrome-launcher': '^2.0.0'
             }
           });
         }
         if (this.options.modules === 'systemjs') {
           _.merge(pkg, {
             devDependencies: {
-              glob: '^7.0.3'
+              glob: '^7.1.1'
             }
           });
         }
       } else {
         _.merge(pkg, {
           devDependencies: {
-            'karma-phantomjs-launcher': '^1.0.0',
-            'karma-phantomjs-shim': '^1.1.2',
-            'phantomjs-prebuilt': '^2.1.6'
+            'karma-phantomjs-launcher': '^1.0.2',
+            'karma-phantomjs-shim': '^1.4.0',
+            'phantomjs-prebuilt': '^2.1.14'
           }
         });
       }
@@ -82,7 +82,7 @@ module.exports = fountain.Base.extend({
       if (this.options.modules === 'webpack') {
         _.merge(pkg, {
           devDependencies: {
-            'karma-webpack': '^1.7.0'
+            'karma-webpack': '^2.0.2'
           }
         });
       }
@@ -90,7 +90,7 @@ module.exports = fountain.Base.extend({
       if (this.options.js === 'babel') {
         _.merge(pkg, {
           devDependencies: {
-            'babel-plugin-istanbul': '^2.0.1'
+            'babel-plugin-istanbul': '^4.0.0'
           }
         });
       }
@@ -98,7 +98,7 @@ module.exports = fountain.Base.extend({
       if (this.options.modules === 'systemjs') {
         _.merge(pkg, {
           devDependencies: {
-            'karma-jspm': '^2.0.2'
+            'karma-jspm': '^2.2.1'
           }
         });
 
