@@ -1,3 +1,5 @@
+/* eslint complexity: "off" */
+
 'use strict';
 
 const lit = require('fountain-generator').lit;

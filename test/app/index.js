@@ -1,3 +1,4 @@
+const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
 const spies = require('chai-spies');
@@ -10,19 +11,19 @@ const TestUtils = require('fountain-generator').TestUtils;
 let context;
 const pkg = {
   devDependencies: {
-    'karma': '^1.3.0',
+    'karma': '^1.4.1',
     'karma-coverage': '^1.1.1',
-    'karma-jasmine': '^1.0.2',
-    'karma-junit-reporter': '^1.1.0',
-    'jasmine': '^2.4.1',
-    'es6-shim': '^0.35.0'
+    'karma-jasmine': '^1.1.0',
+    'karma-junit-reporter': '^1.2.0',
+    'jasmine': '^2.5.3',
+    'es6-shim': '^0.35.3'
   }
 };
 
 test.before(() => {
   context = TestUtils.mock('app');
   require('../../generators/app/index');
-  process.chdir('../../');
+  process.chdir(path.resolve(__dirname, '../../'));
 });
 
 test.beforeEach(() => {
@@ -36,14 +37,14 @@ test.afterEach(() => {
 test('Configure package.json  with angular1/webpack', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'angular-mocks': '^1.5.0-beta.2',
-      'gulp-ng-annotate': '^1.1.0',
-      'karma-angular-filesort': '^1.0.0',
-      'karma-ng-html2js-preprocessor': '^0.2.0',
-      'karma-phantomjs-launcher': '^1.0.0',
-      'karma-phantomjs-shim': '^1.1.2',
-      'phantomjs-prebuilt': '^2.1.6',
-      'karma-webpack': '^1.7.0'
+      'angular-mocks': '^1.6.2',
+      'gulp-ng-annotate': '^2.0.0',
+      'karma-angular-filesort': '^1.0.2',
+      'karma-ng-html2js-preprocessor': '^1.0.0',
+      'karma-phantomjs-launcher': '^1.0.2',
+      'karma-phantomjs-shim': '^1.4.0',
+      'phantomjs-prebuilt': '^2.1.14',
+      'karma-webpack': '^2.0.2'
     },
     eslintConfig: {
       globals: {
@@ -58,14 +59,14 @@ test('Configure package.json  with angular1/webpack', t => {
 test('Configure package.json  with angular1/inject/typescript', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'angular-mocks': '^1.5.0-beta.2',
-      'gulp-ng-annotate': '^1.1.0',
-      'karma-angular-filesort': '^1.0.0',
-      'karma-ng-html2js-preprocessor': '^0.2.0',
+      'angular-mocks': '^1.6.2',
+      'gulp-ng-annotate': '^2.0.0',
+      'karma-angular-filesort': '^1.0.2',
+      'karma-ng-html2js-preprocessor': '^1.0.0',
       'karma-es6-shim': '^1.0.0',
-      'karma-phantomjs-launcher': '^1.0.0',
-      'karma-phantomjs-shim': '^1.1.2',
-      'phantomjs-prebuilt': '^2.1.6'
+      'karma-phantomjs-launcher': '^1.0.2',
+      'karma-phantomjs-shim': '^1.4.0',
+      'phantomjs-prebuilt': '^2.1.14'
     },
     eslintConfig: {
       globals: {
@@ -81,9 +82,9 @@ test('Configure package.json  with angular2/systemjs/typescript', t => {
   process.env.TRAVIS = 'travis';
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'karma-firefox-launcher': '^0.1.7',
-      'glob': '^7.0.3',
-      'karma-jspm': '^2.0.2'
+      'karma-firefox-launcher': '^1.0.0',
+      'glob': '^7.1.1',
+      'karma-jspm': '^2.2.1'
     }
   });
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular2', modules: 'systemjs', js: 'typescript'});
@@ -93,8 +94,8 @@ test('Configure package.json  with angular2/systemjs/typescript', t => {
 test('Configure package.json  with angular2/webpack/typescript', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'karma-chrome-launcher': '^0.2.3',
-      'karma-webpack': '^1.7.0'
+      'karma-chrome-launcher': '^2.0.0',
+      'karma-webpack': '^2.0.2'
     }
   });
   TestUtils.call(context, 'configuring.pkg', {framework: 'angular2', modules: 'webpack', js: 'typescript'});
@@ -104,16 +105,16 @@ test('Configure package.json  with angular2/webpack/typescript', t => {
 test('Configure package.json  with angular1/systemjs/typescript', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'angular-mocks': '^1.5.0-beta.2',
-      'gulp-ng-annotate': '^1.1.0',
-      'karma-angular-filesort': '^1.0.0',
-      'karma-ng-html2js-preprocessor': '^0.2.0',
+      'angular-mocks': '^1.6.2',
+      'gulp-ng-annotate': '^2.0.0',
+      'karma-angular-filesort': '^1.0.2',
+      'karma-ng-html2js-preprocessor': '^1.0.0',
       'karma-generic-preprocessor': '^1.1.0',
       'karma-es6-shim': '^1.0.0',
-      'karma-phantomjs-launcher': '^1.0.0',
-      'karma-phantomjs-shim': '^1.1.2',
-      'phantomjs-prebuilt': '^2.1.6',
-      'karma-jspm': '^2.0.2'
+      'karma-phantomjs-launcher': '^1.0.2',
+      'karma-phantomjs-shim': '^1.4.0',
+      'phantomjs-prebuilt': '^2.1.14',
+      'karma-jspm': '^2.2.1'
     },
     eslintConfig: {
       globals: {
@@ -128,15 +129,15 @@ test('Configure package.json  with angular1/systemjs/typescript', t => {
 test('Configure package.json  with angular1/systemjs/babel', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'angular-mocks': '^1.5.0-beta.2',
-      'gulp-ng-annotate': '^1.1.0',
-      'karma-angular-filesort': '^1.0.0',
-      'karma-ng-html2js-preprocessor': '^0.2.0',
-      'karma-phantomjs-launcher': '^1.0.0',
-      'karma-phantomjs-shim': '^1.1.2',
-      'phantomjs-prebuilt': '^2.1.6',
-      'karma-jspm': '^2.0.2',
-      'babel-plugin-istanbul': '^2.0.1'
+      'angular-mocks': '^1.6.2',
+      'gulp-ng-annotate': '^2.0.0',
+      'karma-angular-filesort': '^1.0.2',
+      'karma-ng-html2js-preprocessor': '^1.0.0',
+      'karma-phantomjs-launcher': '^1.0.2',
+      'karma-phantomjs-shim': '^1.4.0',
+      'phantomjs-prebuilt': '^2.1.14',
+      'karma-jspm': '^2.2.1',
+      'babel-plugin-istanbul': '^4.0.0'
     },
     eslintConfig: {
       globals: {
